@@ -8,6 +8,570 @@ class: center, middle
 class: center, middle
 
 # Cours 3: JavaFX
+
+---
+# Historique
+- A l'origine du langage Java, les interfaces graphiques étaient créées
+en utilisant **la bibliothèque AWT** (`java.awt`).
+
+    - Composants "lourds" (heavyweight) basés sur ceux de la machine cible.
+    - Difficulté de créer des applications réellement multiplateformes (write once, run anywhere), lourdeur.
+    
+- Rapidement, **la bibliothèque Swing** (`javax.swing`) est venue compléter (et partiellement remplacer) AWT.
+
+    - Composants "légers" (lightweight) dessinés par la bibliothèque
+    - Pluggable Look&Feel
+    
+- **JavaFX 1** a tenté – sans grand succès – de remplacer Swing.
+
+    - Essentiellement basé sur un (nouveau) langage de script (JavaFX Script).
+    - Vaine tentative pour concurrencer Flex (basé sur Flash et MXML).
+---
+# Historique
+- Une refonte importante du *toolkit* a pris en compte les critiques formulées et a conduit à une nouvelle mouture : **JavaFX 2**
+
+- Caractéristiques principales :
+
+    - Abandon du langage de script *JavaFX Script*
+    
+    - Choix de deux modes : interfaces basées sur du code Java (API) et/ou sur un langage descriptif utilisant une syntaxe *XML*
+    
+    - Création d'un outil interactif **Scene Builder** pour créer graphiquement des interfaces et générer automatiquement du code FXML
+    
+    - Utilisation possible de feuilles de styles CSS pour adapter la présentation sans toucher au code (créer des thèmes, des skins, etc.)
+    
+    - Application du modèle de conception (design pattern) Builder avec un chaînage de méthodes (Fluent API)
+ 
+---
+# Historique
+- Avec la sortie de Java 8, une nouvelle version baptisée JavaFX 8 a été
+développée : 
+    - Intégration dans la distribution de la plateforme Java SE. Plus de librairie externe à télécharger.
+    
+    - **Scene Builder 2** : nouvelle version de l'outil d'édition graphique de GUI (FXML)
+    
+    - Prise en compte des nouveaux concepts introduits en Java 8 et notamment les expressions lambda et les streams. 
+    
+    - Ajout de composants riches (`DatePicker`, `TreeTableView`, ...)
+    
+    - Gestion des écrans tactiles (`TouchEvent`, `GestureEvent`, ...)
+    
+    - Amélioration des librairies graphiques 2D et 3D
+    
+    - Ajout d'un outil de packaging
+    
+    - **JavaFX** devient le standard officiel pour le développement des interfaces des applications Java
+ 
+---
+# Potentiel de JavaFX
+- **JavaFX** étant le résultat de développements récents, il bénéficie de concepts modernes qui en font un framework intéressant pour la réalisation d'applications dans des domaines très divers.
+
+- **JavaFX** est très bien doté pour développer des interfaces riches en relation avec des données stockées dans des bases de données ou accessibles au travers de serveurs d'informations.
+
+- Sa riche librairie graphique 2D et 3D lui donne également un intéressant potentiel dans des domaines variés :
+
+    - Représentations graphiques
+    
+    - Animations graphiques
+    
+    - Modélisation (CAD, …)
+    
+    - Applications multimédia
+    
+    - Réalité virtuelle et augmentée
+    
+    - Jeux
+ 
+---
+# Potentiel de JavaFX
+- La possibilité de découpler le design graphique (grâce à l'outil **Scene Builder** et à **FXML**) permet de déléguer la conception graphique de l'interface à un spécialiste (UI designer) qui n'a pas l'obligation de connaître et maîtriser le langage Java et ses librairies (API).
+
+- L'application possible de feuilles de style CSS renforce encore cette séparation entre le design graphique et les traitements qui seront effectués à l'aide de code Java.
+
+- Différents composants complexes sont disponibles et permettent, avec un minimum d'effort, de créer des applications riches :
+
+    - Effets visuels (ombrages, transitions, animations, …)
+    
+    - Graphiques 2D (**charts**)
+    
+    - Navigateur web (**WebKit**)
+    
+    - Images, audio, vidéo (media player)
+ 
+ 
+---
+# Potentiel de JavaFX 
+- Actuellement, de nombreuses applications sont des applications web, basées sur les technologies HTML5 + CSS + JavaScript (avec un grand nombre de frameworks disponibles) ou sur Flash/Flex ou Silverlight (les deux derniers cités étant clairement en perte de vitesse).
+
+- Une comparaison détaillée entre ces technologies web et JavaFX sort du cadre de ce cours mais plusieurs billets de blog et documents décrivent les caractéristiques ainsi que les avantages et inconvénients de ces différentes approches technologiques, par exemple :
+
+    - Introduction du livre Mastering JavaFX 8 Controls, Hendrik Ebbers, Oracle Press, 2014
+
+    - Blog Code Makery : http://code.makery.ch/blog/javafx-vs-html5
+---
+
+# IHM déclaratives vs procédurales 
+La plateforme JavaFX offre deux techniques complémentaires pour
+créer les interfaces graphiques (IHM) des applications
+
+**Manière déclarative :**
+- En décrivant l'interface dans un fichier FXML (syntaxe XML)
+
+- L'utilitaire graphique **Scene Builder** facilite la création des fichiers FXML
+
+- L'interface peut être créée par un designer
+
+- Séparation entre présentation et logique de l'application (MVC)
+
+**Manière procédurale :**
+- Utilisation d'API pour construire l'interface avec du code Java
+
+- Création et manipulation dynamique des interfaces
+
+- Création d'extensions et variantes (par héritage)
+
+- Homogénéité des sources de l'application
+
+---
+# Déploiement
+Une application JavaFX peut être déployée (mise à disposition des
+utilisateurs) de différentes manières :
+
+- **Installée localement** comme une application autonome (standalone/desktop application)
+    - Semblable à une application native
+    
+    - La machine virtuelle Java peut être intégrée ou non dans l'exécutable (.exe ou .jar)
+    
+- **Installée sur un serveur** et intégrée dans une page web
+    - Lancée depuis un navigateur, en cliquant sur un lien ou sur un autre élément actif de la page
+    
+    - Lancée automatiquement dès qu'une page est chargée
+    
+    - Utilise la technique **Java Web Start** (fichier JNLP + descripteur de déploiement XML)
+    
+    - Une fois téléchargée, l'application peut également être lancée hors-connexion (mise en cache local)
+    
+---
+# Projets connexes
+ 
+- JavaFX devrait, à terme, être totalement publié en open-source (ce n'est que partiellement le cas) dans le cadre du projet OpenJFX.
+
+- De nombreux projets contribuent à enrichir l'écosystème JavaFX.
+
+- Parmi les principaux (et les plus dynamiques) on peut mentionner :
+
+    - **[ControlsFX](https://github.com/controlsfx/controlsfx)** : Projet open-source destiné à offrir des composants supplémentaires de qualité
+
+    - **[JFXtras](http://jfxtras.org/)** : Projet open-source destiné à fournir aux développeurs des éléments utiles dans leur vie de tous les jours et qui manquent dans la version de base de JavaFX
+
+    - **[DataFX](https://bitbucket.org/datafx/datafx/src/default/README.md)** : Projet open-source destiné à faciliter la collaboration entre une application JavaFX et un système de gestion des données (BD, …)
+
+    - **[TestFX](https://github.com/TestFX)** : Librairie pour automatiser le test des applications JavaFX
+    
+---
+# Références
+Quelques références web utiles :
+ - [Tutoriel officiel Oracle](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm)
+ 
+ - [FX-Experience](http://fxexperience.com) : Blog géré par des experts du domaine (news, demos, …)
+ 
+ - Autre [blog dédié](http://guigarage.com) à différentes thématiques JavaFX
+ 
+ - Communauté des développeurs du projet open-source [OpenFJX](https://openjfx.io/) (qui est un sous-projet de OpenJDK)
+ 
+ - [API JavaFX (Javadoc)](https://openjfx.io/javadoc/11/)
+---
+# Références
+Quelques livres :
+
+- **Learn JavaFX 8 - Building User Experience and Interfaces with Java 8** - Kishori Sharan, Apress, 2015. ISBN: 978-1484211434
+
+- **Pro JavaFX 8 - A Definitive Guide to Building Desktop, Mobile, and Embedded Java Clients** - James Weaver, Weiqi Gao, Stephen Chin, Dean Iverson,
+Johan Vos, Adrian Chin, Apress, 2014. ISBN: 978-1430265740
+
+- **JavaFX 8 - Introduction by Example** - Carl Dea et Mark Heckler, Apress, 2014. ISBN: 978-1430264606
+
+- **Mastering JavaFX 8 Controls** - Hendrik Ebbers, McGraw-Hill Professional - Oracle Press, 2014. ISBN: 978-0071833776
+
+---
+
+class: center, middle
+
+# Première immersion !
+
+---
+# Première application
+
+- Comment se présente une application JavaFX ? (petite immersion avant de décrire plus en détail les concepts de base).
+
+- L'application est codée en créant une sous-classe de `Application`.
+
+- La fenêtre principale d'une application est représentée par un objet de type `Stage` qui est fourni par le système au lancement de l'application.
+
+- L'interface est représentée par un objet de type `Scene` qu'il faut créer et associer à la fenêtre (`Stage`).
+
+- La scène est composée des différents éléments de l'interface graphique(composants de l'interface graphique) qui sont des objets de type `Node`.
+
+- La méthode `start()` construit et lance le tout.
+
+---
+# Métaphore de la salle de spectacle
+
+Les éléments structurels principaux d'une application JavaFX se basent sur la métaphore de *la salle de spectacle*
+
+Remarque : En français, on utilise le terme 'scène' pour parler de l'endroit où se passe le spectacle (l'estrade, les planches) mais également pour parler de ce qui s'y déroule (jouer ou tourner une scène) ce qui peut conduire à un peu de confusion avec cette métaphore.
+
+- **Stage** : L'endroit où a lieu l'action, où se déroule la scène
+
+- **Scene** : Tableau ou séquence faisant intervenir les acteurs
+
+- **Nodes** : Acteurs, figurants, éléments du décor, … (éléments actifs/passifs) qui font partie de la scène en train d'être jouée.
+
+---
+# Hello World !
+Une première application, le traditionnel Hello World !
+
+```java
+public class HelloWorld extends Application {
+
+   @Override
+   public void start(Stage primaryStage) {
+      primaryStage.setTitle("My First JavaFX App");
+      BorderPane root = new BorderPane();
+      Button btnHello = new Button("Hello World");
+      root.setCenter(btnHello);
+      Scene scene = new Scene(root, 250, 100);
+      primaryStage.setScene(scene);
+      primaryStage.show();
+   }
+
+   public static void main(String[] args) {
+      launch(args);
+   }
+}
+```
+---
+# Hello World ! 
+ - JavaFX étant intégré à la plateforme de base Java, aucune librairie externe n'est nécessaire au fonctionnement de l'exemple précédent.
+
+ - Un certain nombre d'importations doivent cependant être effectuées (on y retrouve les classes principales `Application`, `Stage`,
+`Scene` ainsi que les composants `BorderPane` et `Button`) :
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+```
+- Dans cet exemple, la méthode `main()` lance uniquement la méthode statique `launch()` (qui est définie dans la classe `Application`).
+
+- Dans une application un peu plus complexe, elle pourrait effectuer d'autres opérations d'initialisation avant l'invoquer `launch()`.
+
+---
+# Cycle de vie d'une application
+- Le point d'entrée d'une application JavaFX est constitué d'une instance de la classe Application (généralement une sous-classe).
+
+- Lors du lancement d'une application par la méthode statique `Application.launch()`, JavaFX effectue les opérations suivantes :
+
+    1. Crée une instance de la classe qui hérite de `Application`
+    
+    2. Appelle la méthode `init()`
+    
+    3. Appelle la méthode `start()` et lui passe en paramètre une instance de `Stage` (qui représente la fenêtre principale)
+    4. Attend ensuite que l'application se termine; cela se produit lorsque :
+     - La dernière fenêtre de l'application a été fermée (et `Platform.isImplicitExit()` retourne `true`)
+     - L'application appelle `Platform.exit()` (ne pas utiliser `System.Exit()`)
+    5. Appelle la méthode `stop()` 
+    
+---
+# Cycle de vie d'une application
+- La méthode `launch()` est généralement lancée depuis la méthode `main()`. Elle est implicitement lancée s'il n'y a pas de méthode `main()` (ce qui est toléré depuis Java 8).
+
+- D'éventuels paramètres de lancement peuvent être récupérés en invoquant la méthode `getParameters()` dans la méthode `init()` ou ultérieurement (par ex dans la méthode `start()`).
+
+- Au lancement d'une application JavaFX, il est possible de passer des paramètres nommés (syntaxe `--name=value`) ou anonymes :
+```sh
+java -jar Hello.jar --steps=50 --mode=Debug 300 FR
+```
+- `getParameters()` retourne un objet de type `Parameters` dont on peut extraire les valeurs des paramètres à l'aide des méthodes :
+    - `List<String> getRaw()` : Liste brute de tous les paramètres
+    - `Map<String, String> getNamed()` : Liste des paramètres nommés
+    - `List<String> getUnnamed()` : Liste des paramètres anonymes
+    
+---
+# Cycle de vie d'une application
+
+- La méthode `start()` est abstraite et doit donc être redéfinie. 
+
+- Les méthodes `init()` et `stop()` ne doivent pas obligatoirement être
+redéfinies (par défaut elle ne font rien).
+
+- La méthode `start()` s'exécute dans le *JavaFX Application Thread*. C'est dans ce thread que doit être construite l'interface (notamment la création de l'objet `Scene`) et que doivent être exécutées toutes les opérations qui agissent sur des composants attachés à une scène placée dans une fenêtre (live components).
+
+- La méthode `stop()` s'exécute aussi dans le *JavaFX Application Thread*.
+
+- La méthode `init()` ainsi que le constructeur de la classe qui étend `Application` s'exécutent par contre dans le thread *JavaFX Launcher*. Il est possible d'y créer des composants et des conteneurs mais on ne peut pas les placer dans une scène active (live scene).
+
+---
+# Traiter une action de l'utilisateur
+
+- Dans l'exemple **Hello World**, pour que le clic sur le bouton déclenche une action, il faut traiter l'événement associé.
+
+- La méthode `setOnAction()` du bouton permet d'enregistrer un *Event Handler* (c'est une interface fonctionnelle possédant la méthode `handle(event)` qui définit l'action à effectuer).
+
+```java
+public void start(Stage primaryStage) {
+   primaryStage.setTitle("My First JavaFX App");
+   BorderPane root = new BorderPane();
+   Button btnHello = new Button("Say Hello");
+   
+   btnHello.setOnAction( event -> System.out.println("Hello World !"));
+   
+   root.setCenter(btnHello);
+   Scene scene = new Scene(root, 250, 100);
+   primaryStage.setScene(scene);
+   primaryStage.show();
+}
+```
+---
+
+class: center, middle
+
+# Propriétés
+---
+# Notion de propriété
+- La notion de "propriété" (property) est centrale dans JavaFX.
+
+- Une **propriété** est un élément d'une classe que l'on peut manipuler à l'aide de *getters (lecture)* et de *setters (écriture)*.
+
+- Les propriétés sont généralement représentées par des attributs de la classe mais elles pourraient aussi être stockées dans une base de données ou autre système d'information.
+
+- En plus des méthodes `getXXX()` et `setXXX()`, les propriétés JavaFX possèdent une troisième méthode `XXXProperty()` qui retourne un objet qui implémente l'interface `Property` \[XXX : nom de la propriété \].
+
+- Intérêt des propriétés :
+    - Elles peuvent être liées entre-elles *(Binding)*, c.-à-d. que le changement d'une propriété entraîne automatiquement la mise à jour d'une autre.
+
+    - Elles peuvent déclencher un événement lorsque leur valeur change et un gestionnaire d'événement *(Listener)* peut réagir en conséquence.
+    
+---
+# Notion de propriété
+Exemple d'une classe définissant la propriété balance (solde) pour
+un compte bancaire :
+
+```java
+public class BankAccount {
+   private DoubleProperty balance = new SimpleDoubleProperty();
+   
+   public final double getBalance() {
+      return balance.get();
+   }
+
+   public final void setBalance(double amount) {
+      balance.set(amount);
+   }
+
+   public final DoubleProperty balanceProperty() {
+      return balance;
+   }
+
+}
+```
+---
+# Notion de propriété
+- La classe abstraite `DoubleProperty` permet d'emballer une valeur de type double et d'offrir des méthodes pour consulter et modifier la valeur mais également pour *"observer"* et *"lier"* les changements.
+
+- `SimpleDoubleProperty` est une classe concrète prédéfinie.
+
+- La plateforme Java offre des classes similaires pour la plupart des types primitifs, les chaînes de caractères, certaines collections ainsi que le type `Object` qui peut couvrir tous les autres types.
+
+    - `IntegerProperty` / `SimpleIntegerProperty`
+    
+    - `StringProperty` / `SimpleStringProperty`
+    
+    - `ListProperty<E>` / `SimpleListProperty<E>`
+    
+    - `ObjectProperty<T>` / `SimpleObjectProperty<T>`
+    
+- Des classes existent également pour définir des propriétés read-only (`ReadOnlyIntegerWrapper`, `ReadOnlyIntegerProperty`, ...)
+
+---
+# Propriétés read-only
+
+- Il existe des propriétés qui sont en lecture seule (*read-only property*).
+
+- La création de telles propriétés nécessite l'utilisation de classes *wrappers*. Elle servent à isoler la partie de la propriété en lecture seule (visible de l'extérieur) de la partie qui permet de modifier la valeur de la propriété.
+
+- La modification de la valeur de la propriété doit être possible uniquement dans le composant (*bean*) qui définit cette propriété.
+
+- A l'intérieur du wrapper, la propriété en lecture seule est en réalité liée (*bound*) à une autre propriété interne qui est, elle, en lecture et écriture
+
+---
+# Propriétés read-only
+
+Exemple d'une classe définissant la propriété balance (solde) pour
+un compte bancaire en lecture seule (read-only).
+```java
+public class BankAccount {
+   
+   private ReadOnlyDoubleWrapper balance = new ReadOnlyDoubleWrapper();
+   
+   public final double getBalance() {
+      return balance.get();
+   }
+   
+   public final void addInterests(double interestsRate) {
+      double newBalance = balance.get() * (1+interestsRate);
+      balance.set(newBalance);
+   }
+   
+   public final ReadOnlyDoubleProperty balanceProperty() {
+      return balance.getReadOnlyProperty();
+   }
+
+}
+```
+
+---
+# Observation des propriétés
+
+- Toutes les classes de propriétés implémentent l'interface `Observable` et offrent de ce fait, la possibilité d'enregistrer des observateurs (`Listener`) qui seront avertis lorsque la valeur de la propriété change.
+
+- Une instance de l'interface fonctionnelle `ChangeListener<T>` pourra ainsi être créée pour réagir à un tel changement. La méthode `changed()` sera alors invoquée et recevra en paramètre la valeur observée ainsi que l'ancienne et la nouvelle valeur de la propriété.
+
+```java
+DoubleProperty sum = account.balanceProperty();
+sum.addListener( (ObservableValue<? extends Number> obsVal,
+                  Number oldVal,
+                  Number newVal ) ->
+                  {
+                     //--- ChangeListener code
+                     System.out.println(oldVal+" becomes "+ newVal);
+                     . . .
+                  } );
+```
+
+*Ici une expression lambda est utilisée pour implémenter la méthode `changed()`. On pourrait également utiliser une classe anonyme ou créer l'instance d'une classe "ordinaire" qui implémente l'interface `ChangeListener<T>`.*
+
+---
+# Observation des propriétés
+- L'interface fonctionnelle `InvalidationListener<T>` permet également de réagir aux changements des valeurs de propriétés dans les situations où les propriétés sont calculées à partir d'autres et que l'on veut éviter d'effectuer les calculs à chaque changement.
+
+- Avec cette interface, c'est la méthode `invalidated(Observable o)` qui est invoquée lorsqu'un changement potentiel de la valeur de la propriété est intervenu.
+
+- Cette méthode peut cependant être invoquée alors que le résultat observé n'a finalement pas changé (cela dépend des opérations effectuées)
+
+- Les composants utilisés dans les interfaces graphiques (boutons, champs texte, cases à cocher, sliders, etc.) possèdent tous de nombreuses propriétés.
+
+- Pour chacun des composants, la documentation (*Javadoc*) décrit dans une des rubriques (*Property Summary*) la liste des propriétés de la classe concernée ainsi que celles qui sont héritées.
+
+---
+# Lier des propriétés
+- Un des avantages des propriétés JavaFX est la possibilité de pouvoir les lier entre-elles. Ce mécanisme, appelé **binding**, permet de mettre à jour automatiquement une propriété en fonction d'une autre.
+
+- Dans les interfaces utilisateurs, on a fréquemment ce type de liens. Par exemple, lorsqu'on déplace le curseur d'un slider, la valeur d'un champ texte changera (ou la luminosité d'une image, la taille d'un graphique, le niveau sonore, etc.).
+
+- Il est possible de lier deux propriétés **A** et **B** de manière
+
+    - *Unidirectionnelle* : un changement de **A** entraînera un changement de **B** mais pas l'inverse (**B** non modifiable autrement).
+
+    - *Bidirectionnelle* : un changement de **A** entraînera un changement de **B** et réciproquement (les deux sont modifiables).
+    
+---
+# Lier des propriétés
+- La méthode `bind()` permet de créer un lien unidirectionnel.
+
+- La méthode doit être appelée sur la propriété qui sera *"soumise"* à l'autre (celle qui est passée en paramètre). 
+
+```java
+BankAccount account = new BankAccount();
+Slider slider = new Slider();
+slider.valueProperty().bind(account.balanceProperty());
+```
+
+- Dans cet exemple la position du curseur du slider est liée (asservie) à la valeur du solde du compte bancaire. 
+
+- Si l'on tente de modifier la valeur de la propriété associée à la position du slider (qui deviendra non-éditable) d'une autre manière, une exception sera générée.
+
+- Une liaison bidirectionnelle s'effectue de manière similaire, mais en utilisant la méthode `bindBidirectional()`.
+---
+# Lier des propriétés
+- Une propriété ne peut être liée (asservie) qu'à une seule autre si le lien est unidirectionnel (`bind()`). Par contre, les liens bidirectionnels (`bindBidirectional()`) peuvent être multiples.
+
+- Parfois, une propriété dépend d'une autre mais avec une relation plus complexe. Il est ainsi possible de créer des **propriétés calculées**.
+
+- Deux techniques (dites de "haut-niveau") sont à disposition (elles peuvent être combinées) :
+
+    - Utiliser la classe utilitaire `Bindings` qui possède de nombreuses méthodes statiques permettant d'effectuer des opérations.
+
+    - Utiliser les méthodes disponibles dans les classes qui représentent les propriétés; ces méthodes peuvent être chaînées (Fluent API).
+
+- Des opérations de conversions sont parfois nécessaires si le type des propriétés à lier n'est pas le même. Par exemple pour lier un champ texte (`StringProperty`) à un slider dont la valeur est numérique (`DoubleProperty`). 
+
+---
+# Lier des propriétés
+Exemples de binding permettant de coupler la valeur d'un slider (`Area`) aux valeurs de deux autres (`Width` et `Height`)
+
+En utilisant les méthodes statiques de la classe `Bindings` :
+```java
+Slider widthSlider = new Slider(); // Input
+Slider heightSlider = new Slider(); // Input
+Slider areaSlider = new Slider(); // Ouput
+DoubleProperty widthPty = widthSlider.valueProperty();
+DoubleProperty heightPty = heightSlider.valueProperty();
+DoubleProperty areaPty = areaSlider.valueProperty();
+
+areaPty.bind(Bindings.multiply(widthPty, heightPty));
+```
+Même exemple, en utilisant des méthodes chaînées (Fluent API) :
+```java
+Slider widthSlider = new Slider(); // Input
+Slider heightSlider = new Slider(); // Input
+Slider areaSlider = new Slider(); // Ouput
+DoubleProperty widthPty = widthSlider.valueProperty();
+DoubleProperty heightPty = heightSlider.valueProperty();
+DoubleProperty areaPty = areaSlider.valueProperty();
+
+areaPty.bind(widthPty.multiply(heightPty));
+```
+---
+# Lier des propriétés
+
+Un jeu d'opérations est disponible aussi bien avec la classe `Bindings` qu'avec les méthodes chaînables :
+- `min()`, `max()`
+
+- `equal()`, `notEqual()`, `lessThan()`, `lessThanOrEqual()`, …
+
+- `isNull()`, `isNotNull()`, `isEmpty()`, `isNotEmpty()`, …
+
+- `convert()`, `concat()`, `format()`, …
+
+- `valueAt()`, `size()`, …
+
+- `when(cond).then(val1).otherwise(val2)` 
+
+- et beaucoup d'autres
+---
+# Lier des propriétés
+
+Si les opérations disponibles dans les API, dites de haut-niveau, ne permettent pas d'exprimer la relation entre les propriétés, il est possible de définir une liaison de plus bas niveau (*low-level binding*) en redéfinissant la méthode abstraite `computeValue()` d'une des classes de binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
+
+```java
+DoubleBinding complexBinding = new DoubleBinding() {
+   { //--- Set listeners to 'in'-properties
+      super.bind(aSlider.valueProperty(), bSlider.valueProperty());
+   }
+   
+   @Override //--- Compute 'out' value
+   protected double computeValue() {
+      double w = aSlider.valueProperty().get();
+      double h = bSlider.valueProperty().get();
+      return Math.sqrt(h) * Math.pow(w, 3);
+   }
+};
+
+outSlider.valueProperty().bind(complexBinding); // Do the binding
+```
 ---
 class: center, middle
 
@@ -35,791 +599,243 @@ class: center, middle
 
 - Tous les éléments contenus dans un graphe de scène sont des objets qui ont pour classe parente la classe `Node`. Parmi les sous-classes de `Node` on distingue différentes familles :
 
-      - Les formes primitives (*Shape*) 2D et 3D : `Line`, `Circle`, `Rectangle`, `Box`, `Cylinder`, …
+     - Les formes primitives (*Shape*) 2D et 3D : `Line`, `Circle`, `Rectangle`, `Box`, `Cylinder`, …
 
-      - Les conteneurs (*Layout-Pane*) qui se chargent de la disposition (*layout*) des composants enfants et qui ont comme classe parente `Pane` : `AnchorPane`, `BorderPane`, `GridPane`, `HBox`, `VBox`, …
+     - Les conteneurs (*Layout-Pane*) qui se chargent de la disposition (*layout*) des composants enfants et qui ont comme classe parente `Pane` : `AnchorPane`, `BorderPane`, `GridPane`, `HBox`, `VBox`, …
 
-      - Les composants standard (*Controls*) qui étendent la classe `Control` : `Label`, `Button`, `TextField`, `ComboBox`, …
+     - Les composants standard (*Controls*) qui étendent la classe `Control` : `Label`, `Button`, `TextField`, `ComboBox`, …
 
-      - Les composants spécialisés qui sont dédiés à un domaine particulier (par exemple : lecteur multimédia, navigateur web, etc.) : `MediaView`, `WebView`, `ImageView`, `Canvas`, `Chart`, …
-
----
-# Composants – Controls
-- La librairie JavaFX offre un **ensemble de composants** (kit de développement) pour créer les interfaces utilisateurs graphiques.
-
-- Ces *composants d'interface* sont fréquemment nommés **controls** dans la documentation en anglais (parfois **widgets**).
-
-- Dans ce cours, nous utiliserons généralement le terme composant pour parler des éléments qui servent à afficher des informations ou permettre à l'utilisateur d'interagir avec l'application.
-
-- Bien qu'ils constituent les deux des nœuds (`Node`) du graphe de scène, les composants sont à distinguer des 
-conteneurs (layoutpanes) qui servent à disposer les composants et qui ne sont pas directement visibles dans l'interface 
-(les bordures et les couleurs d'arrière-plan permettent cependant de révéler leur présence). 
-
-- Les composants ont tous pour classe parente `Control` qui est une sous-classe de `Node`.
+     - Les composants spécialisés qui sont dédiés à un domaine particulier (par exemple : lecteur multimédia, navigateur web, etc.) : `MediaView`, `WebView`, `ImageView`, `Canvas`, `Chart`, …
 
 ---
-# Composants – Controls
+# Les conteneurs
 
-- Certains composants comme `ScrollPane` ou `SplitPane` jouent, en partie, un rôle de conteneur mais, formellement, ils 
-ne font pas partie de cette famille (ils héritent de `Control` et non de `Pane`).
+- Les conteneurs (*Layout-Pane*) représentent une famille importante parmi les sous-classes de `Node`. Ils ont pour classe parente `Pane` et `Region` qui possèdent de nombreuses propriétés et méthodes héritées par tous les conteneurs.
 
-- On fait parfois la distinction entre composants simples (labels, champs texte, boutons, …) et composants complexes (tables, arbres,
-media-player, navigateur, …).
+- La qualité d'une interface graphique repose sur de nombreux éléments mais la disposition des composants dans la fenêtre figure certainement parmi les plus importants.
 
-- Dans ce chapitre, nous présenterons quelques composants simples et décrirons la manière de les créer et de les utiliser.
+- Dans la création des graphes de scène, les conteneurs (appelés *layout-panes* ou parfois simplement *layouts* ou *panes*) jouent donc un rôle important dans la structuration et la disposition des composants qui seront placés dans les interfaces.
 
-- Une fois que l'on a compris le principe de fonctionnement, il est plus facile de consulter la documentation officielle 
-et de découvrir les propriétés et les comportements des composants offerts par la librairie JavaFX (les mêmes principes 
-de base sont appliqués partout).
-
-- Le cours ne décrira donc pas en détail l'ensemble des composants. Le support de cours ne constitue pas un manuel de 
-référence et il faut, en complément, consulter la documentation disponible.
+- En fonction du design adopté (phase de conception de l'interface), il est important de réfléchir au choix des conteneurs qui permettront au mieux de réaliser la mise en page souhaitée.
 
 ---
-# Composants avec libellés 
-- De nombreux composants affichent et gèrent des textes (libellés, boutons, cases à cocher, etc.).
+# HBox
+- Le layout `HBox` place les composants sur une ligne horizontale. Les composants sont ajoutés à la suite les uns des autres (de gauche à
+droite).
 
-- Les comportements communs de ces composants sont gérés par la classe parente `Labeled`.
+- L'alignement des composants enfants est déterminé par la propriété `alignment`, par défaut `TOP_LEFT` (type énuméré `Pos`).
 
-- Les textes de ces composants peuvent être accompagnés d'un autre composant, généralement un graphique, une image ou une icône.
+- L'espacement horizontal entre les composants est défini par la propriété `spacing` (`0` par défaut). La valeur de cette propriété peut
+être passée en paramètre au constructeur (`new HBox(8)`).
 
-- Quelques propriétés communes aux composants `Labeled` :
-  * `text` :  Texte affiché (`String`).
-  
-  * `font` : Police de caractères (famille, style, taille, …), type `Font`.
-  
-  * `textFill` : Couleur du texte, uniforme ou avec gradient (type `Paint`).
-  
-  * `underline` : Indique si le texte doit être souligné (type `Boolean`).
-  
-  * `alignment` : Alignement général du texte (et du graphique éventuel) dans la zone (type `Pos`). Valable seulement 
-  si texte sur une seule ligne.
+- Si possible, le conteneur respecte la taille préférée des composants. Si le conteneur est trop petit pour afficher tous les composants à
+leur taille préférée, il les réduit jusqu'à `minWidth`.
 
 ---
-# Composants avec libellés 
-- Quelques propriétés communes aux composants `Labeled` :
-  
-  * `wrapText` : Booléen qui définit si le texte passe à la ligne suivante lorsqu'il atteint la limite de la zone. 
-  Le caractère '\n' peut également être inséré pour forcer un retour à la ligne (inconditionnel).
+# HBox
 
-  * `textAlignment` : Alignement des lignes si le texte est multiligne.
-Type énuméré `TextAlignment` (`LEFT`, `RIGHT`, `CENTER`, `JUSTIFY`).
+- L'ajout des composants enfants dans le conteneur s'effectue en invoquant d'abord la méthode générale `getChildren()` qui retourne la liste des enfants du conteneur et en y ajoutant ensuite le composant considéré (méthodes `add()` ou `addAll()`) :
 
-  * `lineSpacing` : Espacement des lignes pour les textes multilignes. Type `Double`.
-
-  * `graphic` : Autre composant (type `Node`) qui accompagne le texte. Généralement un graphique, une image ou une icône.
-
-  * `contentDisplay` : Position du composant additionnel (graphic) par rapport au texte. Type énuméré `ContentDisplay` 
-  (`LEFT`, `RIGHT`, `TOP`, `BOTTOM`, `TEXT_ONLY`, `GRAPHIC_ONLY`).
-
----
-# Composants avec libellés 
-- Quelques propriétés communes aux composants `Labeled` :
-
-  * `graphicTextGap` : Espacement entre le texte et le composant additionnel (graphic). Type `Double`.
-
-  * `mnemonicParsing` : Active le parsing des mnémoniques dans le texte (le caractère qui suit le caractère '_'). Type `Boolean`.
-
-  * `textOverrun` : Comportement si le texte est trop long pour être affiché. Type énuméré `OverrunStyle` (`ELLISPSIS`, `CLIP`, …).
-
-  * `labelPadding` : Définit l'espace autour du texte (et du graphique éventuel). Type `Insets`.
-
-  * `ellipsisString` : Chaîne de caractères utilisée lorsque le texte est tronqué (ellipsis). Par défaut : "…"
-
----
-# Label
-- Le composant Label représente un libellé (= un texte non éditable).
-
-- Les constructeurs permettent de définir le contenu du texte et de l'éventuel composant additionnel (graphic).
-
-   * `new Label("Hello");`
-
-   * `new Label("Warning", warningIcon);`
-
-- L'essentiel des fonctionnalités sont héritées de `Labeled`. Une seule propriété additionnelle se trouve dans Label :
-
-   * `setLabelFor` : Permet de définir un (autre) composant (`Node`) auquel le libellé est associé (utile pour définir un mnémonique).
-
-- **Remarque** : Les objets de type `Text` possèdent certaines similitudes avec les composants de type Label mais `Text` 
-n'est pas une sous-classe de `Control`. Cette classe fait partie de la famille des graphiques (sous-classe de `Shape`) 
-et possède donc des propriétés et des fonctionnalités un peu différentes. 
-
----
-# Label
-<img src="slide12.png" style="position: absolute; left: 600px;  top: 30px;" >
 ```java
-private HBox root = new HBox(20);
-private Label lblA = new Label("Hello");
-private Label lblB = new Label("Big and colored");
-private Label lblC = new Label("A Multiline\nText\nLabel");
+HBox root = new HBox();
+root.getChildren().add(btnA);
+root.getChildren().addAll(btnOk, btnQuit);
+```
+
+- Des méthodes statiques de HBox peuvent être invoquées pour appliquer des contraintes de positionnement :
+    - `hgrow()` : permet d'agrandir le composant passé en paramètre jusqu'à sa taille maximale selon la priorité (`Priority`) donnée
+    
+    - `margin()` : fixe une marge (objet de type `Insets`) autour du composant passé en paramètre (zéro par défaut `Insets.EMPTY`)
+    
+---
+# HBox
+<img src="slide43.png" style="position: absolute; left: 600px;  top: 10px;" >
+Exemple (déclaration des composants et code de la méthode `start()`) :
+```java
+private HBox root;
+private Button btnA = new Button("Alpha");
+private Label lblB = new Label("Bravo");
+private ComboBox<String> cbbC = new ComboBox<>();
 
 @Override
-public void start(Stage primaryStage) throws Exception {
+public void start(Stage primaryStage) {
+   primaryStage.setTitle("Test HBox");
+   
+   root = new HBox(10); // Horizontal Spacing : 10
    
    root.setAlignment(Pos.CENTER);
-   root.setPadding(new Insets(10));
-   root.getChildren().add(lblA);
-   
-   lblB.setFont(Font.font("SansSerif", FontWeight.BOLD, 20));
-   lblB.setTextFill(Color.rgb(180, 50, 50));
-   lblB.setGraphic(new Rectangle(50, 5, Color.ORANGE));
-   lblB.setContentDisplay(ContentDisplay.BOTTOM);
-   
+   root.getChildren().add(btnA);
    root.getChildren().add(lblB);
-   root.getChildren().add(lblC);
    
-   primaryStage.setScene(new Scene(root));
-   primaryStage.setTitle("Label Test");
-   primaryStage.show();
-}
-```
-
----
-# Button
-- Le composant `Button` représente un bouton permettant à l'utilisateur de déclencher une action.
-
-- La classe parente `ButtonBase` rassemble les propriétés communes à différents composants qui se comportent comme des boutons :
-`Button`, `CheckBox`, `Hyperlink`, `MenuButton`, `ToggleButton`.
-
-- Les constructeurs permettent de définir le contenu du texte et de l'éventuel composant additionnel (graphic).
-  * `new Button("Ok");`
-  
-  * `new Button("Save", saveIcon);`
-  
-- Par héritage, toutes les propriétés qui ont été mentionnées pour les composants avec libellés (sous-classes de `Labeled`) 
-sont naturellement applicables pour le composant `Button`.
-
----
-# Button
-Quelques propriétés du composant `Button` :
-
-- `armed` : Booléen qui indique si le bouton est "armé" et prêt à déclencher une action (par exemple souris placée sur 
-le bouton et touche gauche pressée).
-
-- `onAction` : Détermine l'événement à générer lorsque l'action du bouton est déclenchée (par ex. lorsque la touche de 
-la souris a été relâchée). Type `EventHandler<ActionEvent>`.
-
-- `cancelButton` :  Booléen qui indique si le bouton est un bouton Cancel c'est-à-dire que l'action du bouton doit être 
-déclenchée lorsque l'utilisateur presse sur la touche Escape (`VK_ESC`). Cette propriété ne doit être appliquée qu'à un 
-seul bouton de l'interface.
-
-- `defaultButton` : Booléen qui indique si le bouton est un bouton par défaut c'est-à-dire que l'action du bouton doit 
-être déclenchée lorsque l'utilisateur presse sur la touche Enter (`VK_ENTER`). Cette propriété ne doit être appliquée 
-qu'à un seul bouton de l'interface.
-
----
-# Button
-
-- La manière de traiter l'événement généré par le bouton sera expliquée dans le TP consacré à la gestion des événements 
-et à l'écriture de contrôleurs qui se chargeront d'exécuter du code associé aux différents éléments actifs de l'interface.
-
-- Pour ajouter une image à un bouton (où à n'importe quel autre composant de type `Labeled`), on peut utiliser la classe 
-`ImageView` qui permet de représenter une image stockée dans une ressource locale (fichier de type gif, jpeg, png, …) ou en donnant l'URL d'une image sur un serveur web.
-
-- La classe `ImageView` permet également de redimensionner les images et d'en afficher qu'une partie (viewport).
-
-- Dans l'exemple qui suit, un des boutons (`btnLogin`) est affiché en associant une image au texte du libellé. 
-
----
-# Button
-```java
-private static final String LOGO = "logo.jpg";
-private VBox root = new VBox(10);
-private Button btnOk = new Button("OK");
-private Button btnLogin = new Button("Login");
-private Button btnSave = new Button("Save");
-private Button btnMulti = new Button("A Multiline\nRight-Justified\nText");
-
-@Override
-public void start(Stage primaryStage) throws Exception {
-   ...
-   root.setAlignment(Pos.CENTER);
-   root.setPadding(new Insets(20));
-   root.getChildren().add(btnOk);
-
-   btnLogin.setTextFill(Color.BLUE);
-   btnLogin.setFont(Font.font(null, FontWeight.BOLD, 14));
-   btnLogin.setGraphic(new ImageView(LOGO));
-   btnLogin.setContentDisplay(ContentDisplay.TOP);
-
-   root.getChildren().add(btnLogin);
-
-   btnSave.setDefaultButton(true);
-   root.getChildren().add(btnSave);
+   cbbC.getItems().addAll("Charlie", "Delta");
+   cbbC.getSelectionModel().select(0);
    
-   btnMulti.setTextAlignment(TextAlignment.RIGHT);
-   root.getChildren().add(btnMulti);
-   ...
-}
-
-```
-<img src="slide16.png" style="position: absolute; left: 750px;  top: 300px;" >
----
-# Saisie de textes
-
-- La classe abstraite `TextInputControl` est la classe parente de différents composants qui permettent à l'utilisateur de saisir des
-textes. Il s'agit notamment des composants d'interface `TextField`, `PasswordField` et `TextArea`
-
-- La classe `TextInputControl` définit les propriétés de base et les fonctionnalités communes aux composants qui offrent une saisie
-de texte et notamment :
-
-  * La sélection de texte
-
-  * L'édition de texte
-
-  * La gestion du curseur à l'intérieur du texte (caret)
-
-  * Le formatage du texte
-  
----
-# Saisie de textes
-
-Quelques propriétés de la classe `TextInputControl` :
-
-- `text` : Le texte contenu dans le composant (`String`).
-
-- `editable` : Le texte peut être édité par l'utilisateur (`Boolean`).
-
-- `font` : Police de caractères du texte (`Font`).
-
-- `length` : Longueur du texte (`Integer`).
-
-- `caretPosition` : Position courante du curseur / point d'insertion (caret).
-
-- `promptText` : Texte affiché si aucun texte n'a été défini ou saisi par l'utilisateur (`String`). Ce texte n'est pas 
-affiché lorsque le composant possède le focus (avec le curseur qui clignote dans le champ). Ce texte peut éventuellement 
-remplacer un libellé ou une bulle d'aide pour le champ texte.
-
----
-# Saisie de textes
-
-Quelques propriétés de la classe `TextInputControl` :
-
-- `textFormatter` : Formateur de texte associé au composant (`TextFormatter<?>`).
-
-- `selectedText` : Texte sélectionné (`String`).
-
-- `selection` : Indices (de...à) de la zone sélectionnée (`IndexRange`).
-
-- `anchor` : Point d'ancrage (début) de la sélection (`Integer`).
-
----
-# Saisie de textes
-
-Quelques méthodes de la classe `TextInputControl` :
-
-- `clear()` : Efface le texte (vide le champ).
-
-- `copy/cut/paste()` : Transfert du texte dans ou depuis le clipboard.
-
-- `positionCaret()` : Positionne le curseur à une position donnée.
-
-- `forward/backward()` : Déplace d'un caractère le curseur (caret).
-
-- `nextWord()` : Déplace le curseur (caret) au début du prochain mot.
-
-- `insertText()` : Insère une chaîne de caractères dans le texte.
-
----
-# Saisie de textes
-
-Quelques méthodes de la classe `TextInputControl` :
-
-- `appendText()` : Ajoute une chaîne de caractères à la fin du texte.
-
-- `deleteText()` : Supprime une partie du texte (de...à).
-
-- `deleteNextChar()` : Efface le prochain caractère.
-
-- `replaceText()` : Remplace une partie du texte par un autre.
-
-- `selectAll()` : Sélectionne l'ensemble du texte.
-
-- `deselect()` : Annule la sélection courante du texte.
-
----
-# TextField
-
-- Le composant `TextField` représente un champ texte d'une seule ligne qui est éditable par défaut mais qui peut également 
-être utilisé pour afficher du texte.
-- Le composant n'intègre pas de libellé. Il faut utiliser un composant de type `Label` si l'on veut lui associer un libellé.
-- En plus des propriétés héritées (notamment de `TextInputControl`), le composant `TextField` possède les propriétés suivantes :
-  * `alignment` : Alignement du texte dans le champ (`Pos`).
-  
-  * `prefColumnCount` : Nombre de colonnes du champ texte; permet de déterminer la largeur préférée du composant. La 
-  valeur par défaut est définie par la constante `DEFAULT_PREF_COLUMN_COUNT` (12).
-  
-  * `onAction` : Détermine l'événement à générer lorsque l'action du champ texte est déclenchée, en général lorsque 
-  l'utilisateur presse sur la touche Enter (EventHandler<ActionEvent>).
----
-# TextField
-```java
-private HBox root = new HBox(5);
-private Label lblName = new Label("Name");
-private Label lblMobile = new Label("Mobile");
-private TextField tfdName = new TextField();
-private TextField tfdMobile = new TextField();
-
-@Override
-public void start(Stage primaryStage) throws Exception {
-   root.setAlignment(Pos.CENTER);
-   root.getChildren().add(lblName);
-
-   tfdName.setPrefColumnCount(12);
-   tfdName.setPromptText("First and Last-Name");
-
-   root.getChildren().add(tfdName);
-   root.getChildren().add(lblMobile);
-
-   HBox.setMargin(lblMobile, new Insets(0,0,0,10));
-
-   tfdMobile.setPrefColumnCount(8);
-   tfdMobile.setPromptText("Mobile Tel Nr");
-   root.getChildren().add(tfdMobile);
-
-   root.setPadding(new Insets(10));
-
-   primaryStage.setScene(new Scene(root));
-   primaryStage.setTitle("TextField Test");
+   root.getChildren().add(cbbC);
+   
+   primaryStage.setScene(new Scene(root, 300, 100));
    primaryStage.show();
 }
 
 ```
-<img src="slide23.png" style="position: absolute; left: 500px;  top: 50px;" >
 
 ---
-# TextFormatter
+# VBox
+<img src="slide44.png" style="position: absolute; left: 700px;  top: 10px;" >
+- Le layout `VBox` place les composants verticalement, sur une colonne. Les composants sont ainsi ajoutés à la suite les uns des autres.
 
-- On peut associer un formateur de texte à tous les composants qui héritent de `TextInputControl` (propriété `TextFormatter`).
+- Toutes les propriétés et méthodes décrites pour le conteneur `HBox` s'appliquent également au conteneur `VBox` avec seulement quelques adaptations assez évidentes. 
 
-- Ce formateur est un composant de type `TextFormatter<V>` qui permet de définir :
-  * Un convertisseur permettant de convertir le texte du composant en une valeur d'un autre type (par exemple un type 
-  numérique, int, double, …).
-  * Un filtre permettant d'intercepter et de modifier les caractères saisis par l'utilisateur pendant l'édition du 
-  texte (n'accepter que les chiffres par ex.).
-
-- Le formateur peut définir un filtre ou un convertisseur ou les deux.
-
-- Le filtre et le convertisseur sont transmis dans le constructeur du formateur qui possède les surcharges suivantes :
-```java
-TextFormatter(StringConverter<V> valueConverter)
-TextFormatter(StringConverter<V> valueConverter, V defaultValue)
-TextFormatter(UnaryOperator<TextFormatter.Change> filter)
-TextFormatter(StringConverter<V> valueConverter, V defaultValue,
-UnaryOperator<TextFormatter.Change> filter)
-```
-
----
-# TextFormatter
-
-- Le paramètre générique `V` du formateur (`TextFormatter<V>`) définit le type de la propriété value. On ne peut 
-utiliser cette propriété que si l'on a défini un convertisseur dans le formateur.
-
-- Le convertisseur est un objet de type `StringConverter<V>` qui doit implémenter les méthodes de conversions entre les propriétés `text` (String) et `value` (V) :
-
-  * `fromString()` : `text` -> `value`
-  
-  * `toString()` : `value` -> `text`
-- Il existe des implémentations prédéfinies de convertisseurs pour certains types courants :
-
-  * `BooleanStringConverter`, `DoubleStringConverter`, `IntegerStringConverter`, `NumberStringConverter`, `DateTimeStringConverter`, ...
-
-- Si l'on souhaite gérer le format d'affichage et/ou traiter certaines erreurs, il est préférable de redéfinir les méthodes de conversion.
----
-# TextFormatter
-<img src="slide26.png" style="position: absolute; left: 720px;  top: 50px;" >
-
-- Exemple de convertisseur associé à un champ texte :
+- Exemple :
 
 ```java
-TextFormatter<Double> formatter = new TextFormatter<Double>(
-       new StringConverter<Double>() {
-           @Override //--- Convert text (String) to Double 
-           public Double fromString(String text) {
-               try {
-                   return Double.parseDouble(text);
-               }
-               catch (NumberFormatException e) {
-                   return Double.NaN;
-               }
-           }
-           @Override //--- Convert Double to String and format 
-           public String toString(Double value) {
-               return String.format("%.2f", value);
-           }
-       }
-);
-
-TextField textField = new TextField();
-textField.setTextFormatter(formatter);
-
-primaryStage.setScene(new Scene(new FlowPane(textField), 200, 100));
-primaryStage.show();
-```
-
----
-#TextFormatter
-- Le filtre que l'on peut greffer à un formateur est un objet de type `UnaryOperator<TextFormatter.Change>` :
-  * `UnaryOperator<T>` : interface fonctionnelle avec la méthode abstraite `Change apply(Change c)`
-
-  * `Change` : classe interne de `TextFormatter` représentant l'état des changements effectués
-
-- La classe contient de nombreuses méthodes permettant de réagir aux changements effectués dans le texte lors de
-  
-  * L'ajout de texte (`isAdded()`)
-  
-  * Le remplacement de texte (`isReplaced()`)
-  
-  * La suppression de texte (`isDeleted()`)
-  
-- Les opérations disponibles sont des opérations de bas niveau qui permettent d'intervenir lors de la frappe des caractères dans le
-champ mais qui nécessitent plus de travail pour créer des filtres plus complexes (adresse e-mail ou numéro de téléphone valide, etc.) .
-
----
-# TextFormatter
-- Exemple de filtre qui n'accepte que des chiffres ou '.' ou '-'. Une expression régulière (regex) est utilisée pour rejeter les autres caractères
-
-```java
-TextFormatter<String> tFmtNb = new TextFormatter<String>(change -> {
-       change.setText(change.getText().replaceAll("[^0-9.-]", ""));
-       return change;
-   });
-   
-tfdTemperature.setTextFormatter(tFmtNb);
-```
-
-- Filtre qui n'accepte que 4 caractères (sans espaces)
-
-```java
-TextFormatter<String> tFmt4 = new TextFormatter<String>(change -> {
-      String content = change.getControlNewText();
-      if (content.length()>4 || change.getText().equals(' '))
-         change.setText("");
-      return change;
-   });
-   
-tfdCode.setTextFormatter(tFmt4);
-```
----
-# Label - TextField - Button
-- L'exemple qui suit illustre une utilisation des composants `Label`, `TextField` et `Button` qui sont assemblés pour 
-créer un panneau de login simple.
-
-- La propriété `disable` (héritée de `Node`) permet d'activer ou de désactiver un composant de l'interface. Un composant désactivé
-reste visible mais n'est plus actif (il est généralement 'grisé').
-
-- Une liaison (`binding`) est effectuée entre la propriété `text` (contenu du champ texte) et la propriété `disable` en utilisant des opérations
-intermédiaires (`isEmpty()` et `or()`).
-
-- De cette manière, le champ `Password` est désactivé tant que le champ `Username` est vide. D'autre part, le bouton n'est activé que
-si les deux champs texte sont remplis.
-
-- Une manière simple et élégante de gérer l'interaction et d'éviter des traitements d'erreurs.
-
----
-# Label - TextField - Button
-
-```java
-    private GridPane root = new GridPane();
-    private Label userLabel = new Label("Username:");
-    private Label passwordLabel = new Label("Password:");
-    private TextField userField = new TextField();
-    private PasswordField passwordField = new PasswordField();
-    private Button loginButton = new Button("Login");
-
-    public void start(Stage primaryStage) {
-        passwordField.disableProperty().bind(userField.textProperty().isEmpty());
-        loginButton.disableProperty().bind(userField.textProperty().isEmpty()
-                .or(passwordField.textProperty().isEmpty()));
-
-        root.setHgap(6);
-        root.setVgap(12);
-        root.setPadding(new Insets(15));
-```
----
-# Label - TextField - Button
-```java
-        root.add(userLabel, 0, 0);
-        root.add(userField, 1, 0);
-        root.add(passwordLabel, 0, 1);
-        root.add(passwordField, 1, 1);
-        root.add(loginButton, 0, 2, 2, 1);
-
-        GridPane.setHalignment(loginButton, HPos.CENTER);
-        GridPane.setMargin(loginButton, new Insets(10, 0, 0, 0));
-
-        loginButton.setOnAction(event -> System.out.println("Login: "
-                + userField.getText()
-                + " / " + passwordField.getText()));
-
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Login Panel");
-        primaryStage.show();
-    }
-
-```
-<img src="slide31.png" style="position: absolute; left: 600px;  top: 30px;" >
----
-class: center, middle
-
-# FXML
----
-
-#IHM procédurales vs déclaratives
-- Avec JavaFX, les interfaces peuvent être créées de deux manières :
-
-  * Procédurale : en écrivant du code Java qui fait appel aux API de la plateforme et qui utilise les composants/conteneurs à
-disposition (classes et interfaces)
-
-  * Déclarative : en décrivant l'interface dans un fichier au format FXML qui sera ensuite chargé dynamiquement dans l'application
-- Les premiers cours ont décrit les bases de la technique procédurale (programmatique) permettant de créer des interfaces.
-
-- Le présent chapitre abordera la deuxième possibilité de créer les interfaces (les vues) en utilisant notamment l'outil 
-*SceneBuilder* qui permet, de manière interactive, de créer les fichiers FXML.
-
-- *SceneBuilder* est une application qui doit être installée et n'est plus contenue directement dans le JDK.
----
-
-# Fichiers FXML
-- Au centre de l'approche déclarative, se trouvent les fichiers FXML.
-
-- Un fichier FXML est un fichier au format XML dont la syntaxe est conçue pour décrire l'interface (la vue) avec ses composants, ses
-conteneurs, sa disposition, …
-
-  * Le fichier FXML décrit le "quoi" mais pas le "comment"
-
-- A l'exécution, le fichier FXML sera chargé par l'application (classe `FXMLLoader`) et un objet Java sera créé 
-(généralement la racine est un conteneur) avec les éléments que le fichier décrit (les composants, conteneurs, graphiques, …).
-  
-  * Un fichier FXML constitue une forme particulière de sérialisation d'objets, utilisée spécifiquement pour décrire les interfaces
-
-- Il est possible de créer les fichiers FXML avec un éditeur de texte mais, plus généralement, on utilise un outil graphique (*SceneBuilder*)
-qui permet de concevoir l'interface de manière conviviale et de générer automatiquement le fichier FXML correspondant.
-
----
-
-# Fichiers FXML
-
-- Les objets créés par le chargement de fichiers FXML peuvent être assignés à la racine d'un graphe de scène ou 
-représenter un des nœuds dans un graphe de scène créé de manière procédurale.
-
-- Une fois chargés, les nœuds issus de fichiers FXML sont totalement équivalents à ceux créés de manière procédurale. Les mêmes
-opérations et manipulations peuvent leur être appliquées.
-
-- Le langage FXML n'est pas associé à un schéma XML mais la structure de sa syntaxe correspond à celle des API JavaFX :
-  * Les classes JavaFX (conteneurs, composants) peuvent être utilisées comme éléments dans la syntaxe XML
-
-  * Les propriétés des composants correspondent à leurs attributs
-
-- Même si certaines possibilités existent (en lien notamment avec du code JavaScript) on conseille généralement d'utiliser 
-les fichiers FXML exclusivement pour décrire les interfaces, et d'effectuer tous les traitements (activité des contrôleurs) d
-ans le code Java.
-
----
-# SceneBuilder
-
-- L'outil graphique **SceneBuilder** permet de concevoir l'interface de manière interactive (WYSIWYG) en assemblant 
-les conteneurs et les composants et en définissant leurs propriétés.
-
-- Le mode de fonctionnement de cet utilitaire est assez classique avec une zone d'édition centrale, entourée d'un 
-certain nombre d'outils : palettes de conteneurs, de composants, de menus, de graphiques, vue de la structure 
-hiérarchique de l'interface, inspecteurs de propriétés, de layout, etc.
-
-- L'emploi de cet outil n'est pas décrit en détail dans ce support de cours, il faut se référer à la documentation 
-disponible. Son utilisation est cependant assez intuitive, pour autant que les éléments affichés soient connus (notamment 
-les caractéristiques et propriétés principales des conteneurs et des composants).
-
-- Malgré l'outil graphique, on n'échappe donc pas à une compréhension minimale des API (composants, conteneurs, propriétés, …).
-
----
-# Interprétation des fichiers FXML 
-
-- Lors du chargement du fichier FXML, son contenu est interprété et des objets Java correspondants sont créés.
-
-Par exemple, l'élément :
-
-```xml
-<BorderPane prefHeight="80.0" prefWidth="250.0" . . .>
-```
-sera interprété comme :
-
-```java
-BorderPane rootPane = new BorderPane();
-rootPane.setPrefHeight(80.0);
-rootPane.setPrefWidth(250.0);
-```
-
-Quand un attribut commence par le nom d'une classe suivi d'un point et d'un identificateur, par exemple :
-
-```xml
-<TextField GridPane.columnIndex="3" . . . >
-```
-
-l'attribut sera interprété comme une invocation de méthode statique :
-
-```java
-TextField tfd = new TextField();
-GridPane.setColumnIndex(tfd, 3);
-```
-
----
-# Interprétation des fichiers FXML
-
-- Pour les propriétés qui ne peuvent pas facilement être représentées par une chaîne de caractères, un élément est 
-imbriqué (plutôt que de déclarer des attributs).
-
-- Par exemple, si l'on considère l'élément
-```xml
-<Label id="title" fx:id="title" text="Titre" textFill="#0022cc"
-BorderPane.alignment="CENTER">
-<font>
-<Font name="SansSerif Bold" size="20.0" />
-</font>
-</Label>
-```
-
-- On constate que la propriété `Font` est codée comme un élément imbriqué dans l'élément Label.
-
-- Pour les propriétés de type liste (par exemple `children`), les éléments de la liste sont simplement imbriqués et 
-répétés dans l'élément représentant la liste (par exemple, les composants enfants seront listés entre les balises `<children>` et `</children>`).
----
-# Liens FXML <-> programme 
-- Le lien entre les composants décrits dans le fichier FXML et le programme est établi par les attributs `fx:id` :
-
-```xml
-<Label id="title" fx:id="title" text="Titre" textFill="#0022cc" ...>
-```
-
-- L'attribut `fx:id` fonctionne en lien avec l'annotation `@FXML` que l'on peut utiliser dans les contrôleurs, et qui 
-va indiquer au système que le composant avec le nom `fx:id` pourra être injecté dans l'objet correspondant de la classe contrôleur.
-
-```java
-public class SayHelloController {
-   @FXML
-   private Button btnHello;
-   @FXML // fx:id="title"
-   private Label title; // Object injected by FXMLLoader
-```
-
----
-# Liens FXML <-> programme 
-
-- La classe qui joue le rôle de contrôleur pour une interface déclarée en FXML doit être annoncée dans l'élément racine, 
-en utilisant l'attribut `fx:controller` :
-```xml
-<BorderPane prefHeight="80.0" prefWidth="250.0"
-style="-fx-background-color: #FFFCAA;"
-xmlns=http://javafx.com/javafx/8
-xmlns:fx=http://javafx.com/fxml/1
-fx:controller="SayHelloController">
-...
-```
-
-- **Attention** : Les attributs qui définissent les namespaces `xmlns=…` ainsi que `xmlns:fx=…` sont utilisés par 
-l'environnement JavaFX (FXMLLoader, SceneBuilder, etc.). Ils ne doivent donc pas être modifiés !
-
----
-# Liens FXML <-> programme 
-
-- Pour les composants actifs déclarés dans une interface en FXML, on peut indiquer la méthode du contrôleur qui doit être invoquée en
-utilisant l'attribut `fx:onEvent="#methodName"` :
-
-```xml
-<Button fx:id="btnHello" onAction="#handleButtonAction" 
-      text="Say Hello" BorderPane.alignment="CENTER" />
-```
-
-- Dans la classe contrôleur, ces méthodes devront (comme les composants associés) être annotées avec `@FXML`.
-
-```java
-@FXML
-private void handleButtonAction(ActionEvent event) {
-   title.setText("Hello !");
-   title.setTextFill(Color.FUCHSIA);
+private VBox root;
+private Button btnA = new Button("Alpha");
+private Label lblB = new Label("Bravo");
+private ComboBox<String> cbbC = new ComboBox<>();
+
+@Override
+public void start(Stage primaryStage) {
+   primaryStage.setTitle("Test VBox");
+   VBox.setVgrow(btnA, Priority.ALWAYS);
+   root = new VBox(10); // Vertical Spacing : 10
+
+   // Initialisation et ajout des composants comme au transparent précédent
+
+   primaryStage.setScene(new Scene(root, 100, 100));
+   primaryStage.show();
 }
+
 ```
 
 ---
-# Liens FXML <-> programme 
-- Dans les classes qui agissent comme "contrôleurs", on peut définir une méthode `initialize()` (qui doit être annotée 
-avec `@FXML`) pour effectuer certaines initialisations.
+# FlowPane 
+- Le layout `FlowPane` place les composants sur une ligne horizontale ou verticale et passe à la ligne ou à la colonne suivante (*wrapping*) lorsqu'il n'y a plus assez de place disponible.
 
-- Cette méthode est automatiquement invoquée après le chargement du fichier FXML.
+- Un des paramètres du constructeur (de type `Orientation`) détermine s'il s'agit d'un `FlowPane` horizontal (par défaut) ou vertical.
 
-- Elle peut être utile pour initialiser certains composants, en faisant par exemple appel au modèle.
+- L'ajout des composants enfants dans un conteneur `FlowPane` s'effectue en invoquant `getChildren().add(node)` ou `addAll(n, …)`
+
+- Quelques propriétés importantes du conteneur `FlowPane` :
+    - `hgap `: Espacement horizontal entre les composants ou colonnes
+    - `vgap` : Espacement vertical entre les composants ou lignes
+    - `padding` : Espacement autour du conteneur (marge)
+    - `alignment` : Alignement global des composants dans le conteneur
+    - `rowValignment` : Alignement vertical dans les lignes 
+    - `columnHalignment` : Alignement horizontal dans les colonnes
+    - `prefWrapLength` : Détermine la largeur préférée (si horizontal-pane) ou la hauteur préférée (si vertical-pane)
+    - `orientation` : Orientation du `FlowPane`
+
+---
+# FlowPane 
+- Exemple :
 
 ```java
-@FXML
-private void initialize() {
-   cbbCountry.getItems().addAll("Allemagne", "Angleterre", "Belgique",
-         "Espagne", "France", "Italie",
-         "Pays-Bas", "Portugal", "Suisse");
-   lstProducts.getItems().addAll(model.getProducts());
-. . .
+private FlowPane root;
+private Button btnA = new Button("__Alpha__");
+private Label lblB = new Label("__Bravo__");
+private Button btnC = new Button("__Charlie__");
+private Label lblD = new Label("__Delta__");
+private Button btnE = new Button("__Echo__");
+private Label lblF = new Label("__Foxtrot__");
+private Button btnG = new Button("__Golf__");
+
+@Override
+public void start(Stage primaryStage) {
+   // Voir diapo suivante
 }
 ```
 ---
-# Liens FXML <-> programme 
-- L'attribut `id` ne doit pas être confondu avec l'attribut `fx:id` :
+# FlowPane
+<img src="slide47.png" style="position: absolute; left: 600px;  top: 50px;" >
+- Exemple :
 
-```xml
-<Label id="title" fx:id="title" text="Titre" textFill="#0022cc" ...>
+```java
+@Override
+public void start(Stage primaryStage) {
+   primaryStage.setTitle("FlowPane (horizontal)");
+   root = new FlowPane();
+
+   root.getChildren().add(btnA); // Ajout
+   root.getChildren().add(lblB); // des
+   root.getChildren().add(btnC); // composants
+   root.getChildren().add(lblD);
+   root.getChildren().add(btnE);
+   root.getChildren().add(lblF);
+   root.getChildren().add(btnG);
+   
+   root.setPadding(new Insets(5)); // Marge extérieure
+   root.setHgap(10); // Espacement horiz. entre composants
+   root.setVgap(15); // Espacement vertical entre lignes
+   root.setPrefWrapLength(250); // Largeur préférée du conteneur
+   root.setRowValignment(VPos.BOTTOM); // Alignement vertical dans lignes
+   
+   primaryStage.setScene(new Scene(root));
+   primaryStage.show();
+}
 ```
-
-- L'attribut `id` définit un sélecteur CSS de type Id qui permet d'associer des règles de style aux composants 
-portant cet Id.
-
-  * Exemple dans un fichier CSS :
-
-      ```css
-      #title {
-           -fx-font-size: 24pt;
-      }
-      ```
-
-- Dans le fichier FXML, une feuille de style (fichier CSS) peut être associé à un composant avec l'attribut `stylesheets="@CSS_File"`
-
-```xml
-<BorderPane stylesheets="@SayHello.css" . . . >
-```
-
-- L'éditeur *SceneBuilder* permet (dans l'inspecteur de propriétés) de créer l'attribut `id` et de définir le fichier CSS associé (Stylesheets).
 ---
-# Liens FXML <-> programme 
-- Il est possible d'accéder au contrôleur associé au fichier FXML en
-créant un chargeur (loader) pour ce fichier (plutôt que d'utiliser la
-méthode statique `FXMLLoader.load()`) .
+# TilePane
+- Le layout `TilePane` place les composants dans une grille alimentée soit horizontalement (par ligne, de gauche à droite) soit verticalement (par colonne, de haut en bas).
 
-- Cela peut être utile pour avoir accès au contrôleur, par exemple pour
-lui communiquer la référence du modèle de l'application 
+- Un des paramètres du constructeur (de type Orientation) détermine s'il s'agit d'un `TilePane` horizontal (par défaut) ou vertical.
 
-   ```java
-   public void start(Stage primaryStage) throws Exception {
-         //--- Chargement du fichier FXML et recherche du contrôleur associé
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("SayHello.fxml"));
-         BorderPane root = loader.load();
-         SayHelloController ctrl = loader.getController();
-         ctrl.setModel(model);
-         Scene scene = new Scene(root);
-   ```
+- On définit pour la grille un certain nombre de colonnes (propriété `prefColumns`) si l'orientation est horizontale ou un certain nombre de lignes (propriété `prefRows`) si l'orientation est verticale.
 
-- Dans ce cas, on utilisera la méthode d'instance `load()` pour charger
-le fichier FXML et obtenir la référence de la racine du graphe de scène.
+- Toutes les cellules de cette grille (les tuiles) ont la même taille qui correspond à la plus grande largeur préférée et à la plus grande hauteur préférée parmi les composants placés dans ce conteneur.
+
+- Le conteneur `TilePane` est très proche du conteneur `FlowPane`. La différence principale réside dans le fait que toutes les cellules ont obligatoirement la même taille (ce qui n'est pas le cas pour `FlowPane`).
 
 ---
-# Liens FXML <-> programme
+# BorderPane
+<img src="slide49.png" style="position: absolute; left: 650px;  top: 7px;" >
+- Le conteneur `BorderPane` permet de placer les composants enfants dans cinq zones : `Top`, `Bottom`, `Left`, `Right` et `Center`.
 
-- Si le contrôleur d'une interface déclarée avec FXML ne possède pas de constructeur par défaut, il faut créer le 
-contrôleur et l'associer dans le code du programme, avant le chargement du fichier FXML.
+- Un seul objet `Node` (composant, conteneur, …) peut être placé dans chacun de ces emplacements.
 
-- Le code suivant illustre la manière de le faire :
-      ```java
-      public void start(Stage primaryStage) throws Exception {
-            //--- Chargement du fichier FXML et association du contrôleur
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SayHello.fxml"));
-            loader.setController(new SayHelloController("a param"));
-            BorderPane root = loader.load();
-      ```
-- Dans ce cas, il n'est pas nécessaire de déclarer le contrôleur dans le
-fichier FXML (`fx:controller="..."`).
+- Les composants placés dans les zones `Top` et `Bottom` :
+    - Gardent leur hauteur préférée
+    - Sont éventuellement agrandis horizontalement jusqu'à leur largeur maximale ou réduit à leur taille minimale en fonction de la largeur du conteneur.
+
+- Les composants placés dans les zones `Left` et `Right` :
+    - Gardent leur largeur préférée
+    - Sont éventuellement agrandis verticalement jusqu'à leur hauteur maximale ou réduit à leur taille minimale en fonction de la hauteur restante entre les (éventuelles) zones `Top` et `Bottom` du conteneur.
+
+- Le composant placé dans la zone `Center` :
+    - Est éventuellement agrandi ou réduit dans les deux directions.
+---
+# BorderPane
+- Le conteneur `BorderPane` est fréquemment utilisé comme conteneur racine du graphe de scène car il correspond à une division assez classique de la fenêtre principale d'une application (barre de titre, barre d'état, zone d'options, zone principale, etc.).
+
+- Pour placer plusieurs composants dans les zones du `BorderPane`, il faut y ajouter des nœuds de type conteneur et ajouter ensuite les
+composants dans ces conteneurs imbriqués.
+
+- Il est donc très fréquent d'imbriquer plusieurs conteneurs pour obtenir la disposition désirée des composants de l'interface.
+
+- Le graphe de scène représente donc un arbre d'imbrication dont la hauteur (nombre de niveaux) dépend du nombre de composants et de la complexité de la structure de l'interface graphique
+
+---
+# GridPane
+- Le conteneur `GridPane` permet de disposer les composants enfants dans une grille flexible (arrangement en lignes et en colonnes), un peu à la manière d'une table HTML.
+
+- La grille peut être irrégulière, la hauteur des lignes et la largeur des colonnes de la grille ne sont pas nécessairement uniformes.
+
+- La zone occupée par un composant peut s'étendre (span) sur plusieurs lignes et/ou sur plusieurs colonnes.
+
+- Le nombre de lignes et de colonnes de la grille est déterminé automatiquement par les endroits où sont placés les composants.
+
+- Par défaut, la hauteur de chaque ligne est déterminée par la hauteur préférée du composant le plus haut qui s'y trouve.
+
+- Par défaut, la largeur de chaque colonne est déterminée par la largeur préférée du composant le plus large qui s'y trouve.
+
+---
+# Conclusion (temporaire)
+- La librairie JavaFX offre un ensemble de composants (kit de développement) pour créer les interfaces utilisateurs graphiques.
+
+- Les différents conteneurs permettent de créer des interfaces graphiques aussi complexes que nécessaires. La diversité des layouts permet au concepteur de prévoir l'adaptation des composants dans toutes les situations.
+
+- Il nous manque maintenant à décrire les *composants*.  Ce sont les éléments qui servent à afficher des informations ou
+permettre à l'utilisateur d'interagir avec l'application : Libellés, icônes, boutons, champs-texte, menus, cases à cocher, etc.
+
+- Bien qu'ils constituent les deux des nœuds (node) du graphe de scène, les composants sont à distinguer des conteneurs (layoutpanes) qui servent à disposer les composants et qui ne sont pas directement visibles dans l'interface (les bordures et les couleurs d'arrière-plan permettent cependant de révéler leur présence). 
+
 
